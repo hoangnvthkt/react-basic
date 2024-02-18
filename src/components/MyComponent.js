@@ -9,10 +9,16 @@ class Mycomponent extends React.Component {
     address: "",
     age: "",
   };
+  handleClick = () => {
+    alert(`my name is ${this.state.name}`);
+  };
   render() {
     return (
       <>
         <div>my name is {this.state.name}</div>
+        <div>
+          <button onClick={this.handleClick}>Click me</button>
+        </div>
       </>
     );
   }
