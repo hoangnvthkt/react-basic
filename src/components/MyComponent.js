@@ -9,7 +9,7 @@ class Mycomponent extends React.Component {
   // DRY : Don't repeat yourself
   state = {
     listUser: [
-      { id: 1, name: "hoang", age: 24 },
+      { id: 1, name: "hoang", age: 16 },
       { id: 2, name: "nhu", age: 26 },
       { id: 3, name: "an", age: 26 },
     ],
