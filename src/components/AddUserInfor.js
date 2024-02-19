@@ -23,7 +23,12 @@ class AddUserInfor extends React.Component {
       name: this.state.name,
       age: this.state.age,
     });
-    console.log(this.state);
+    // Reset ô nhập liệu
+    this.setState({
+      id: "",
+      name: "",
+      age: "",
+    });
   };
   render() {
     return (
