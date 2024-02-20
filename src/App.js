@@ -4,8 +4,13 @@ import "./App.scss";
 // import { increaseCounter, decreaseCounter } from "./redux/action/counterAction";
 // import Mycomponent from "./components/MyComponent";
 import React from "react";
+import Header from "./components/Header/Header";
 
 const App = () => {
-  return <div className="app-container">Hello world</div>;
+  return (
+    <div className="app-container">
+      <Header />
+    </div>
+  );
 };
 export default App;
