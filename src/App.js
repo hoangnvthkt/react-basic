@@ -5,23 +5,19 @@ import "./App.scss";
 // import Mycomponent from "./components/MyComponent";
 import React from "react";
 import Header from "./components/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <div className="app-container">
-      <Header />
-      <div>
-        Test Link
-        <div>
-          <button>
-            <Link to={`/Users`}>Go to Users Page</Link>
-          </button>
-          <button>
-            <Link to={`/Admin`}> Go to Admin Page</Link>
-          </button>
-        </div>
+      <div className="header-container">
+        <Header />
       </div>
+      <div className="main-container">
+        <Outlet />
+      </div>
+      <div className="sidenav-container"></div>
+      <div className="app-container"></div>
     </div>
   );
 };
