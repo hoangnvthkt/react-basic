@@ -13,10 +13,11 @@ const App = () => {
       <div className="header-container">
         <Header />
       </div>
-      <div className="main-container"></div>
-      <div className="sidenav-container"></div>
-      <div className="app-content">
-        <Outlet />
+      <div className="main-container">
+        <div className="sidenav-container"></div>
+        <div className="app-content">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

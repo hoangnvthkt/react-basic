@@ -30,13 +30,15 @@ const Header = () => {
             <Nav.Link href="/Users">Users</Nav.Link>
             <Nav.Link href="Admin">Admin</Nav.Link> */}
           </Nav>
-          <nav>
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
+          <Nav>
+            <button className="btn-login">Login</button>
+            <button className="btn-signup">Sign Up</button>
+            {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Profile</NavDropdown.Item>
               <NavDropdown.Item>Login</NavDropdown.Item>
               <NavDropdown.Item>Logout</NavDropdown.Item>
-            </NavDropdown>
-          </nav>
+            </NavDropdown> */}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
