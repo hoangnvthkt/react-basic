@@ -4,8 +4,9 @@ import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
 import { postCreateNewUser } from "../../../services/apiServices";
 import { toast } from "react-toastify";
+
 const ModalCreateUser = (props) => {
-  const { show, setShow } = props;
+  const { show, setShow, fetchListUser } = props;
 
   const handleClose = () => {
     setUserName("");
@@ -66,6 +67,7 @@ const ModalCreateUser = (props) => {
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
+      await fetchListUser();
     }
 
     if (data && data.EC !== 0) {
