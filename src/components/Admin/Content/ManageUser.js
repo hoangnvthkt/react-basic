@@ -13,7 +13,7 @@ const ManageUser = (props) => {
   const [listUsers, setListUsers] = useState([]);
 
   const handleClickBtnUpdate = (user) => {
-    // console.log("check >>", us er);
+    // console.log("check >>", user);
     setDataUpdate(user);
     setShowModalUpdateUser(true);
   };
@@ -56,6 +56,8 @@ const ManageUser = (props) => {
           show={showModalUpdateUser}
           setShow={setShowModalUpdateUser}
           dataUpdate={dataUpdate}
+          fetchListUser={fetchListUser}
+          setDataUpdate={setDataUpdate}
         />
       </div>
     </div>
