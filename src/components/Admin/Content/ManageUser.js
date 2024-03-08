@@ -1,14 +1,22 @@
 import ModalCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { FcPlus } from "react-icons/fc";
-
 import TableUser from "./TableUser";
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiServices";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const ManageUser = (props) => {
-  const [showModalCreateUser, setshowModalCreateUser] = useState("false");
+  const [showModalCreateUser, setshowModalCreateUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({}); // vì data dạng object nên để {}
   const [listUsers, setListUsers] = useState([]);
+
+  const handleClickBtnUpdate = (user) => {
+    // console.log("check >>", us er);
+    setDataUpdate(user);
+    setShowModalUpdateUser(true);
+  };
   useEffect(() => {
     fetchListUser();
     //DidmoutComponent
@@ -34,12 +42,20 @@ const ManageUser = (props) => {
         </div>
 
         <div className="table-users-container">
-          <TableUser listUsers={listUsers} />
+          <TableUser
+            listUsers={listUsers}
+            handleClickBtnUpdate={handleClickBtnUpdate}
+          />
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setshowModalCreateUser}
           fetchListUser={fetchListUser}
+        />
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
+          dataUpdate={dataUpdate}
         />
       </div>
     </div>
