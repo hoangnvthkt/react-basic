@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
-import { putUpdateUser } from "../../../services/apiServices";
-import { toast } from "react-toastify";
 import _ from "lodash";
 
-const ModalUpdateUser = (props) => {
-  const { show, setShow, fetchListUser, dataUpdate, setDataUpdate } = props;
+const ModalViewUser = (props) => {
+  const { show, setShow, dataUpdate } = props;
 
   const handleClose = () => {
     // setUserName("");
@@ -17,15 +15,15 @@ const ModalUpdateUser = (props) => {
     // setRole("USER");
     setPreviewImage("");
     setShow(false);
-    setDataUpdate({});
-    console.log("check dataUpdate", dataUpdate);
+    // setDataUpdate({});
+    // console.log("check dataUpdate", dataUpdate);
   };
   // const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [role, setRole] = useState("USER");
-  const [image, setImage] = useState("");
+  //   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const ModalUpdateUser = (props) => {
 
       setEmail(dataUpdate.email);
       setUserName(dataUpdate.username);
-      setImage("");
+      //   setImage("");
       setRole(dataUpdate.role);
       if (dataUpdate.image) {
         setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
@@ -42,55 +40,55 @@ const ModalUpdateUser = (props) => {
     }
   }, [dataUpdate]);
 
-  const handleUploadImage = (event) => {
-    if (event.target && event.target.files && event.target.files[0]) {
-      setPreviewImage(URL.createObjectURL(event.target.files[0]));
-      setImage(event.target.files[0]);
-    } else {
-      // setPreviewImage("");
-    }
-  };
+  //   const handleUploadImage = (event) => {
+  //     if (event.target && event.target.files && event.target.files[0]) {
+  //       setPreviewImage(URL.createObjectURL(event.target.files[0]));
+  //       setImage(event.target.files[0]);
+  //     } else {
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-  const handleSubmitCreateUser = async () => {
-    const isValidEmail = validateEmail(email);
-    if (!isValidEmail) {
-      toast.error("Invalid email");
-      return;
-    }
+  //     }
+  //   };
 
-    // if (!password) {
-    //   toast.error("Invalid password");
-    //   return;
-    // }
+  //   const validateEmail = (email) => {
+  //     return String(email)
+  //       .toLowerCase()
+  //       .match(
+  //         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //       );
+  //   };
+  //   const handleSubmitCreateUser = async () => {
+  //     const isValidEmail = validateEmail(email);
+  //     if (!isValidEmail) {
+  //       toast.error("Invalid email");
+  //       return;
+  //     }
 
-    // let data = {
-    //   email: email,
-    //   username: userName,
-    //   password: password,
-    //   role: role,
-    //   userImage: image,
-    // };
-    // console.log({ data });
+  // if (!password) {
+  //   toast.error("Invalid password");
+  //   return;
+  // }
 
-    let data = await putUpdateUser(dataUpdate.id, userName, role, image);
+  // let data = {
+  //   email: email,
+  //   username: userName,
+  //   password: password,
+  //   role: role,
+  //   userImage: image,
+  // };
+  // console.log({ data });
 
-    if (data && data.EC === 0) {
-      toast.success(data.EM);
-      handleClose();
-      await fetchListUser();
-    }
+  //     let data = await putUpdateUser(dataUpdate.id, userName, role, image);
 
-    if (data && data.EC !== 0) {
-      toast.error(data.EM);
-    }
-  };
+  //     if (data && data.EC === 0) {
+  //       toast.success(data.EM);
+  //       handleClose();
+  //       await fetchListUser();
+  //     }
+
+  //     if (data && data.EC !== 0) {
+  //       toast.error(data.EM);
+  //     }
+  //   };
 
   return (
     <>
@@ -133,6 +131,7 @@ const ModalUpdateUser = (props) => {
                 type="text"
                 className="form-control"
                 value={userName}
+                disabled
                 onChange={(event) => setUserName(event.target.value)}
               />
             </div>
@@ -142,6 +141,7 @@ const ModalUpdateUser = (props) => {
                 className="form-select"
                 onChange={(event) => setRole(event.target.value)}
                 value={role}
+                disabled
               >
                 <option selected value={"USER"}>
                   USERS
@@ -158,7 +158,8 @@ const ModalUpdateUser = (props) => {
                 hidden
                 id="upload"
                 multiple
-                onChange={(event) => handleUploadImage(event)}
+                disabled
+                // onChange={(event) => handleUploadImage(event)}
               />
             </div>
             <div className="col-md-12 image-preview">
@@ -174,12 +175,12 @@ const ModalUpdateUser = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
+          {/* <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </>
   );
 };
-export default ModalUpdateUser;
+export default ModalViewUser;
