@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import ReactPaginate from "react-paginate";
 
 const TableUserPaginate = (props) => {
   const { listUsers, pageCount } = props;
   const handlePageClick = (event) => {
     props.fetchListUserWithPaginate(+event.selected + 1);
+    props.setCurrentPage(+event.selected + 1);
     console.log(`User requested page number ${event.selected}`);
   };
 
@@ -56,7 +56,7 @@ const TableUserPaginate = (props) => {
             })}
           {listUsers && listUsers.length === 0 && (
             <tr>
-              <td colSpan={"4"}>Not found data</td>
+              <td colSpan={"5"}>Not found data</td>
             </tr>
           )}
         </tbody>
@@ -81,6 +81,7 @@ const TableUserPaginate = (props) => {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={props.currentPage - 1}
         />
       </div>
     </>
