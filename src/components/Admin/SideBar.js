@@ -45,7 +45,7 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            Hoi Dan IT
+            NGUYỄN VĂN HOÀNG
           </div>
         </SidebarHeader>
 
