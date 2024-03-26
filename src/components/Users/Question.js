@@ -4,7 +4,6 @@ const Question = (props) => {
   if (_.isEmpty(data)) {
     return <></>;
   }
-  console.log("check data props", data);
 
   const handleHandleCheckbox = (event, aId, qId) => {
     props.handleCheckbox(aId, qId);
