@@ -20,8 +20,9 @@ import {
 import sidebarBg from "../../assets/bg2.jpg";
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SideBar = (props) => {
+  const navigate = useNavigate();
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
@@ -45,7 +46,7 @@ const SideBar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            NGUYỄN VĂN HOÀNG
+            <span onClick={() => navigate("/")}>NGUYỄN VĂN HOÀNG</span>
           </div>
         </SidebarHeader>
 
@@ -65,7 +66,10 @@ const SideBar = (props) => {
                 Quản lý Users
                 <Link to="/Admin/Manage-Users" />
               </MenuItem>
-              <MenuItem> Quản lý bài Quiz</MenuItem>
+              <MenuItem>
+                Quản lý bài Quiz
+                <Link to="/Admin/Manage-quizzes" />
+              </MenuItem>
               <MenuItem> Quản lý câu hỏi</MenuItem>
             </SubMenu>
           </Menu>
