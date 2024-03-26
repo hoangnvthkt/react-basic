@@ -8,7 +8,7 @@ const DetailQuiz = (props) => {
   const params = useParams();
   const quizId = params.id;
   const location = useLocation();
-  console.log("check location", location);
+
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   useEffect(() => {
@@ -31,12 +31,14 @@ const DetailQuiz = (props) => {
               questionDescription = item.description;
               image = item.image;
             }
+
+            item.answers.isSelected = false;
             answers.push(item.answers);
           });
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
-      console.log("check data>>", data);
+
       setDataQuiz(data);
     }
   };
@@ -49,6 +51,30 @@ const DetailQuiz = (props) => {
 
   const handleNext = () => {
     if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
+  };
+
+  const handleCheckbox = (answerId, questionId) => {
+    let dataQuizClone = _.cloneDeep(dataQuiz); // react hook doesn't merge state
+    let question = dataQuizClone.find(
+      (item) => +item.questionId === +questionId
+    );
+    // console.log("check question", question);
+    if (question && question.answers) {
+      let b = question.answers.map((item) => {
+        if (+item.id === +answerId) {
+          item.isSelected = !item.isSelected;
+        }
+        return item;
+      });
+      question.answers = b;
+    }
+    let index = dataQuizClone.findIndex(
+      (item) => +item.questionId === +questionId
+    );
+    if (index > -1) {
+      dataQuizClone[index] = question;
+      setDataQuiz(dataQuizClone);
+    }
   };
   return (
     <div className="detail-quiz-container">
@@ -63,6 +89,7 @@ const DetailQuiz = (props) => {
         <div className="q-content">
           <Question
             index={index}
+            handleCheckbox={handleCheckbox}
             data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
           />
         </div>
@@ -73,6 +100,7 @@ const DetailQuiz = (props) => {
           <button className="btn btn-primary" onClick={() => handleNext()}>
             Next
           </button>
+          <button className="btn btn-warning">Finish</button>
         </div>
       </div>
       <div className="right-content">Count Down</div>
